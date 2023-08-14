@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars: 
+    server_name: program
+  tasks:
+    - name: update apt
+      apt: update_cache=yes
+    - name: install apache2
+      apt: name=apache2 state=latest
+    - name: create documrnt root
+      file: path=/var/www/{{ server_name }} state=directory owner=www-data group=www-data
+    - name: setup index.html
+      template: src=index.html dest=/var/www/{{ server_name }}
+    - name: setup virtualhost
+      template: src=vhost.tpl dest=/etc/apache2/sites-available/000-default.conf
+      notify: restart apache2
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+      

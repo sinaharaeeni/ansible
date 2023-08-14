@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+  - name: install docker
+    apt: name=docker.io state=latest
+  - name: deploy docker
+    docker_container:
+      image: nginx:alpine
+      name: nginx
+      state: started
+      ports:
+      - "8080:80"
