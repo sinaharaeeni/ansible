@@ -1,0 +1,9 @@
+- hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: create local users
+      user:
+        name: '{{ item }}'
+        state: present
+      with_items: '{{ user_names }}'

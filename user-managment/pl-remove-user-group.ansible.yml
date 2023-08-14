@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    - name: create groups
+      ansible.builtin.group:
+        name: group-test
+        state: absent
+    - name: create user
+      user:
+        name: user-test
+        state: absent
+        groups: group-test

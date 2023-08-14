@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    - name: create local users
+      user:
+        name: '{{ item.name }}'
+        state: present
+        groups: '{{ item.groups }}'
+      loop:
+      - { name: 'test1', groups: grp1 }
+      - { name: 'test2', groups: grp1 }
+      - { name: 'test3', groups: grp1 }
