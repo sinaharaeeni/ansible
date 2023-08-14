@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - name: run if host os is debian
+      when: ansible_os_family == "debian"
+      ansible.builtin.command: echo "i am debian"

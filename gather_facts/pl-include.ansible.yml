@@ -1,0 +1,6 @@
+- hosts: localhost
+  tasks:
+    - include: debian.yml
+      when: ansible_os_family == "debian"
+    - include: redhat.yml
+      when: ansible_os_family == "redhat"
