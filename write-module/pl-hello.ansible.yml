@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - name: test hello world
+      hello_world:
+      register: result
