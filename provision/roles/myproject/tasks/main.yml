@@ -1,0 +1,25 @@
+- name: ------ create directory1 in /home ------
+  file: path=/home/dir1 state=directory owner=root group=root mode=0755
+  tags: create_dir1
+
+- name: ------ create directory2 in /home ------
+  file:
+    path: /home/dir2
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: create_dir2
+
+- name: ------ create file1 in /home/dir1 ------
+  file: path=/home/dir1/file1 state=touch owner=root group=root mode=0644
+  tags: create_file1
+
+- name: ------ create file2 in /home/dir2 ------
+  file:
+    path: /home/dir2/file2
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+  tags: create_file2
