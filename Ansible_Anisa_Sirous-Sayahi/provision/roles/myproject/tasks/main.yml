@@ -23,3 +23,104 @@
     group: root
     mode: 0644
   tags: create_file2
+
+- set_fact: myvar=123
+
+- name: ------ show myvar ------
+  debug: 
+    msg: "{{ myvar }}"
+  tags: debug_mod
+
+- name: ------ show test_var ------
+  debug: 
+    msg: "{{ test_var }} --- {{ test_var2 }}"
+  tags: show_test_var
+
+- name: ------ show myvariable ------
+  debug: 
+    msg: "{{ myvariable }}"
+  tags: show_myvariable
+
+- name: ------ show person info ------
+  debug: 
+    msg: "firstname: {{ person.name.first_name }}, lastname: {{ person.name.last_name }}, city: {{ person.city }} "
+  tags: show_person_info
+
+- name: ------ show user list ------
+  debug: 
+    msg: "{{user_lists}} "
+  tags: show_user_list
+
+- name: ------ show user list 2 ------
+  debug: 
+    msg: "{{user_lists_2}} "
+  tags: show_user_list_2
+
+- name: ------ show user list 2 index 0 ------
+  debug: 
+    msg: "{{user_lists_2[0]}} "
+  tags: show_user_list_2_index
+
+- name: ------ show mytest variable ------
+  debug: 
+    msg: "{{mytest}} "
+  tags: show_mytest_variable
+
+# - name: ------ show package name ------
+#  debug: 
+#    msg: "{{package_name}} "
+#  tags: show_package
+
+- name: ------ show build-in variables ------
+  debug: 
+    msg: "{{ hostvars }} "
+  tags: show_hostvars
+
+- set_fact: exercisevar="Exercise_number_6_2"
+  tags: show_exercisevar
+
+- name: ------ show my variables ------
+  debug: 
+    msg: "{{ exercisevar }} "
+  tags: show_exercisevar
+
+- name: ------ show group variables ------
+  debug: 
+    msg: "{{ http_port}} "
+  tags: show_group_variables
+
+- name: ------ command module ------
+  command: mkdir -/home/test1
+  tags: command_module
+
+- name: ------ command module cat ------
+  command: cat file1
+  args:
+    chdir: /home/dir1
+    creates: /home/dir4
+    removes:
+  register: catty
+  tags: command_module_cat
+
+- name: ------ show catty variables ------
+  debug: 
+    msg: "{{ catty.stdout }} "
+  tags: command_module_cat
+
+- name: ------ command module df ------
+  command: df -h
+  register: command_df
+  tags: command_module_df
+
+- name: ------ show command_df variables ------
+  debug: 
+    msg: "{{ command_df.stdout_lines }} "
+  tags: command_module_df
+
+- name: ------ expect module ------
+  expect:
+    command: passwd ali
+    responses:
+      password: "Anisa"
+  no_log: true
+  tags: expect_mod

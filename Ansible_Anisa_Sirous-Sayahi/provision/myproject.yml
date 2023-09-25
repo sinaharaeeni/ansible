@@ -1,4 +1,19 @@
 ---
 - hosts: myservers
+
+#  gather_facts: false
+
+  vars:
+    - test_var: "hello"
+    - test_var2: "anisa"
+#    - exercisevar: "Exercise_number_6_1"
+
+  vars_files:
+    - var1.yml
+    - var2.yml
+    - var3.yml
+    - vars1.yml
+    - vars2.yml
+
   roles:
   - myproject

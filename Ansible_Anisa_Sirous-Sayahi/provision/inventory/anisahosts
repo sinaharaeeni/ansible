@@ -1,3 +1,9 @@
 [myservers]
 192.168.5.62
 192.168.5.64
+#192.168.3.42 ansible_connection=ssh ansible_user=root ansible_become_password=root
+#192.168.3.47 ansible_connection=ssh ansible_user=root ansible_become_password=root
+
+[myservers:vars]
+http_port=80
+ntp_server=pool.ntp.org

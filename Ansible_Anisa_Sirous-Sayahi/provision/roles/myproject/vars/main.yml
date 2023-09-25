@@ -1,0 +1,17 @@
+myvariable: "Hello Ansible"
+
+person:
+  name:
+    first_name: ahmad
+    last_name: ahmadi
+  city: tehran
+
+user_lists:
+  - Amin
+  - Amir
+  - Aref
+  - Ali
+
+user_lists_2: [Reza, Ahmad, Hossein, Naser, Arya]
+
+#exercisevar: "Exercise_number_6_3"
