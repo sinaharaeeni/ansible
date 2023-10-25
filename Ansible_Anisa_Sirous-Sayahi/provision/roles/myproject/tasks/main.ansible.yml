@@ -124,3 +124,115 @@
       password: "Anisa"
   no_log: true
   tags: expect_mod
+
+- name: ------ script module ------
+  script: echo.sh
+  register: scp_var
+  tags: script_mod
+
+- name: ------ show scp_var variables ------
+  debug: msg="{{ scp_var.stdout_lines }} "
+  tags: script_mod
+
+- name: ------ shell module ------
+  shell: echo "Test shell module" > /home/shellout.tmp
+  tags: shell_mod
+
+- name: ------ copy module ------
+  copy:
+    src: myfile.txt
+    dest: /home/dir2
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+    backup: yes
+  tags: copy_mod
+
+- name: ------ fetch module ------
+  fetch:
+    src: /home/dir1/file1
+    dest: /home/
+    flat: no
+    validate_checksum: yes
+  tags: fetch_mod
+
+- name: ------ group module ------
+  group:
+    name: DevOps
+    state: present
+  tags: group_mod
+
+- name: ------ user module ------
+  user:
+    name: test-user
+    group: DevOps
+    state: present
+    shell: /bin/bash
+    home: /tmp/test-user
+    password: 123
+  tags: user_mod
+
+- name: ------ yum repository ------
+  yum_repository:
+    name: local-repository
+    description: local repository
+    baseurl: http://repo.sinacomsys.local:9099/repository/yum-photon/$releasever/photon_$releasever_$basearch
+    gpgcheck: no
+    enabled: yes
+    state: present
+  tags: yum_repo_mod
+
+- name: ------ yum install nginx ------
+  yum:
+    name: nginx
+    state: present
+  tags: yum_mod
+
+- name: ------ yum update nginx ------
+  yum:
+    name: nginx
+    state: latest
+    update_only: yes
+  tags: yum_update
+
+- name: ------ yum update all ------
+  yum:
+    name: '*'
+    state: latest
+    exclude: kernel*
+  tags: yum_update_all
+
+- name: ------ template module ------
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    backup: yes
+    force: yes
+  tags: template_mod
+
+- name: ------ lineinfile module ------
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    insertafter: '        listen 80'
+    line: '        listen 8081'
+    state: absent
+  tags: lineinfile_mod
+
+- name: ------ replace module ------
+  replace:
+    path: /etc/nginx/nginx.conf
+    regexp: '        listen 80'
+    replace: '        listen 8082'
+    backup: yes
+  tags: replace_mod
+
+- name: ------ archive module ------
+  ansible.builtin.unarchive:
+    path: /home/testdir/*
+    dest: /home/test.tar.gz
+    exclude_path:
+      - file1
+      - file2
+  tags: archive_mod
+
