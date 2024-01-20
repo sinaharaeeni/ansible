@@ -1,0 +1,63 @@
+- name: "Create a default playbook."
+  hosts: localhost
+
+  vars:
+    - project_name: "webserver"
+    - project_directory: "/home/sina/ansible/"
+
+  tasks:
+    - name: "Create project directory."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}"
+        state: directory
+        mode: '0755'
+
+    - name: "Create main project yml."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/{{ project_name }}.yml"
+        state: touch
+        mode: '0755'
+
+    - name: "Create inventory directory."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/inventory"
+        state: directory
+        mode: '0755'
+
+    - name: "Create inventory file."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/inventory/hosts"
+        state: touch
+        mode: '0755'
+
+    - name: "Create roles directory."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/roles/{{ project_name }}"
+        state: directory
+        mode: '0755'
+
+    - name: "Create roles sub directory."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/roles/{{ project_name }}/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - defaults
+        - files
+        - handlers
+        - meta
+        - tasks
+        - templates
+        - vars
+
+    - name: "Create main.yml in roles sub directory."
+      ansible.builtin.file:
+        path: "{{ project_directory }}/{{ project_name }}/roles/{{ project_name }}/{{ item }}/main.yml"
+        state: touch
+        mode: '0755'
+      loop:
+        - defaults
+        - handlers
+        - meta
+        - tasks
+        - vars
