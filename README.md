@@ -1,4 +1,5 @@
-![image](https://github.com/sinaharaeeni/ansible/assets/60283544/50ecb0a4-cd9e-4887-ba1e-905b1bb6ce48)# ansible
-ansible playbook
-## course 
-Ansible-100187-Naser Kargar
+# In this project i'm shared my sample and project of Ansible playbook.
+
+- Course 1 from Naser Karger
+
+- Course 2 from Sirous Sayahi
