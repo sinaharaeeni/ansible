@@ -1,5 +1,6 @@
 - name: "Create a default playbook."
   hosts: localhost
+  gather_facts: false
 
   vars:
     - project_name: "webserver"
